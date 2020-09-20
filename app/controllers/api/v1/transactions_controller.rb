@@ -6,14 +6,25 @@ module Api
 
       # PUT /transactions/:transaction_id
       def create
-        transaction = ::TransactionService::Create.new(create_params).call
-        render json: transaction, status: :created
+        response = ::TransactionService::Create.new(create_params).call
+        if response.success?
+          render json: {status: response.success?}, status: :ok
+        else
+          render json: {status: response.success?, message: response.message}, status: :not_acceptable
+        end
+
       end
 
       # GET /transactions/:type
       def type
         @transaction = Transaction.where(t_type: params[:type].strip).pluck(:transaction_id)
-        render json: {transactions: @transaction}
+        if @transaction.present?
+          res = {transactions: @transaction}
+        else
+          res = {transactions: @transaction, message: "No transaction type: #{params[:type].strip}"}
+        end
+
+        render json: res, status: :ok
       end
 
       # GET /sum/:transaction_id
