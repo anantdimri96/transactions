@@ -2,7 +2,7 @@ module Api
   module V1
     class TransactionsController < ApplicationController
 
-      before_action :set_transaction, only: [:calculate_sum]
+      before_action :set_transaction, only: [:show, :calculate_sum]
 
       # PUT /transactions/:transaction_id
       def create
@@ -31,6 +31,14 @@ module Api
       def calculate_sum
         data = ::TransactionService::ResultantSum.new(@transaction).call
         render json: {sum: data}
+      end
+
+      def show
+        if @transaction.present?
+          render json: @transaction, status: :ok
+        else
+          render json: {}, status: :ok
+        end
       end
 
       private
