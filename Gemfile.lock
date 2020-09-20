@@ -56,6 +56,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    ancestry (3.1.0)
+      activerecord (>= 4.2.0)
+    awesome_print (1.8.0)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -90,6 +93,8 @@ GEM
       mini_portile2 (~> 2.4.0)
     puma (3.12.6)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.3.3)
@@ -146,11 +151,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ancestry
+  awesome_print
   bootsnap (>= 1.4.2)
   byebug
   listen (~> 3.2)
   mysql2 (>= 0.3.13, < 0.5)
   puma (~> 3.0)
+  rack-cors
   rails (~> 6.0.3, >= 6.0.3.1)
   spring
   spring-watcher-listen (~> 2.0.0)
