@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_19_153420) do
+ActiveRecord::Schema.define(version: 2020_09_20_132531) do
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "t_type"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_09_19_153420) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_transactions_on_ancestry"
+    t.index ["transaction_id", "t_type", "amount"], name: "index_transactions_on_transaction_id_and_t_type_and_amount", unique: true
   end
 
 end
